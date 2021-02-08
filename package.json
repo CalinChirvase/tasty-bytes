@@ -1,5 +1,5 @@
 {
-  "name": "part4",
+  "name": "tasty-bytes",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -21,7 +21,7 @@
     "web-vitals": "^0.2.4"
   },
   "scripts": {
-    "start": "cross-env NODE_ENV=production node index.js",
+    "start": "node server",
     "build": "react-scripts build",
     "testOld": "cross-env NODE_ENV=test jest --verbose --runInBand",
     "dev": "cross-env NODE_ENV=development nodemon index.js",
