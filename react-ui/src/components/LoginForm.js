@@ -1,4 +1,4 @@
-import React from 'react'
+import { React, useState } from 'react'
 
 //material ui components
 import Paper from '@material-ui/core/Paper'
@@ -7,20 +7,23 @@ import Typography from '@material-ui/core/Typography'
 import Grid from '@material-ui/core/Grid'
 import Button from '@material-ui/core/Button'
 import Link from '@material-ui/core/Link'
+import Alert from '@material-ui/lab/Alert'
 
 
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import { login } from '../reducers/loginReducer'
 
 
 const styles = {
-  paper: { padding: 100, marginTop: 200, marginBottom: 100 }
+  paper: { padding: 100, marginTop: 100 }
 }
 
 const LoginForm = () => {
+  const [notification, setNotification] = useState('')
 
   const dispatch = useDispatch()
+  const user = useSelector(state => state.user)
   const history = useHistory()
 
   const handleLogin = async (event) => {
@@ -29,14 +32,24 @@ const LoginForm = () => {
     const password = event.target[1].value
     event.target[0].value = ''
     event.target[1].value = ''
-    history.push('/')
     dispatch(login(username, password))
+    if (user.token === undefined) {
+      setNotification('Username or password is incorrect!')
+      setTimeout(() => setNotification(''), 5000)
+    } else {
+      history.push('/')
+    }
   }
 
   return (
     <div>
       <Grid container direction="column" alignContent="center">
         <Paper style={styles.paper}>
+          <Grid item>
+            {notification !== ''
+              ? <Alert severity="error">{notification}</Alert>
+              : null}
+          </Grid>
           <Grid item>
             <Typography variant="h6" color="inherit">
               Welcome back!
