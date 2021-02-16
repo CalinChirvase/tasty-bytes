@@ -1,14 +1,22 @@
 import React from 'react'
-import Toolbar from '@material-ui/core/Toolbar'
+import { useSelector } from 'react-redux'
 import Typography from '@material-ui/core/Typography'
 
 const Home = () => {
+  const user = useSelector(state => state.user)
+
   return (
     <div>
-      <Toolbar />
-      <Typography variant="h6" color="inherit">
-       Welcome!
-      </Typography>
+      {user.token !== undefined
+        ?
+        <Typography variant="h6" color="inherit">
+          Welcome {user.name}!
+        </Typography>
+        :
+        <Typography variant="h6" color="inherit">
+          Hello stranger!
+        </Typography>
+      }
     </div>
   )
 }

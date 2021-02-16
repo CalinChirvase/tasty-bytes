@@ -6,7 +6,7 @@ import loginReducer from './reducers/loginReducer'
 import blogReducer from './reducers/blogReducer'
 
 const reducer = combineReducers({
-  login: loginReducer,
+  user: loginReducer,
   blogs: blogReducer
 })
 
