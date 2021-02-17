@@ -1,21 +1,9 @@
-import loginService from '../services/login'
-
-export const login = (username, password) => {
+export const login = (user) => {
   return async dispatch => {
-    try {
-      const user = await loginService.login(username, password)
-      dispatch({
-        type: 'LOGIN',
-        data: user
-      })
-
-    } catch (error) {
-      new Error('Error in login action creator!')
-      dispatch({
-        type: 'ERROR',
-        error: error
-      })
-    }
+    dispatch({
+      type: 'LOGIN',
+      data: user
+    })
   }
 }
 
@@ -27,14 +15,20 @@ export const logout = () => {
   }
 }
 
-const loginReducer = (state = [], action) => {
+const loginReducer = (state = { isLoggedIn: false }, action) => {
   switch(action.type) {
   case 'LOGIN':
-    return action.data
+    return {
+      ...action.data,
+      isLoggedIn: true
+    }
   case 'LOGOUT':
-    return []
+    return { isLoggedIn: false }
   case 'ERROR':
-    return action.error
+    return {
+      ...action.error,
+      isLoggedIn: false
+    }
   default:
     return state
   }

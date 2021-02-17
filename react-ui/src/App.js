@@ -1,14 +1,14 @@
-import { React, useEffect } from 'react'
+import React from 'react'
 import { Container } from '@material-ui/core'
 import { Switch, Route } from 'react-router-dom'
 import NavBar from './components/NavBar'
 import LoginForm from './components/LoginForm'
 import Home from './components/Home'
+import CreateAccount from './components/CreateAccount'
 //import Image from './assets/test-image.jpg'
 import { ThemeProvider } from '@material-ui/styles'
 import theme from './components/theme'
 //import { withStyles } from '@material-ui/core/styles'
-import blogService from './services/blogs'
 
 //const styles = {
 //  '@global': {
@@ -20,19 +20,14 @@ import blogService from './services/blogs'
 //}
 const App = () => {
 
-  useEffect(() => {
-    const loggedUserJSON = window.localStorage.getItem('loggedTastyBytesUser')
-    if (loggedUserJSON) {
-      const user = JSON.parse(loggedUserJSON)
-      blogService.setToken(user.token)
-    }
-  }, [])
-
   return (
     <ThemeProvider theme={theme}>
       <Container>
         <NavBar />
         <Switch>
+          <Route path='/register'>
+            <CreateAccount />
+          </Route>
           <Route path='/login'>
             <LoginForm />
           </Route>

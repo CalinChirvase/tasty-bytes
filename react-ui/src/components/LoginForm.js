@@ -10,9 +10,11 @@ import Link from '@material-ui/core/Link'
 import Alert from '@material-ui/lab/Alert'
 
 
-import { useDispatch, useSelector } from 'react-redux'
+import { Link as RouterLink } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import { login } from '../reducers/loginReducer'
+import loginService from '../services/login'
 
 
 const styles = {
@@ -23,7 +25,6 @@ const LoginForm = () => {
   const [notification, setNotification] = useState('')
 
   const dispatch = useDispatch()
-  const user = useSelector(state => state.user)
   const history = useHistory()
 
   const handleLogin = async (event) => {
@@ -32,12 +33,15 @@ const LoginForm = () => {
     const password = event.target[1].value
     event.target[0].value = ''
     event.target[1].value = ''
-    dispatch(login(username, password))
-    if (user.token === undefined) {
-      setNotification('Username or password is incorrect!')
-      setTimeout(() => setNotification(''), 5000)
-    } else {
+    try {
+      //login user and update state
+      const response = await loginService.login(username, password)
+      dispatch(login(response))
       history.push('/')
+    } catch (error) {
+      //display alert if login fails
+      setNotification('Username or password is incorrect!')
+      setTimeout(() => setNotification(''), 4000)
     }
   }
 
@@ -48,7 +52,7 @@ const LoginForm = () => {
           <Grid item>
             {notification !== ''
               ? <Alert severity="error">{notification}</Alert>
-              : null}
+              : <div></div>}
           </Grid>
           <Grid item>
             <Typography variant="h6" color="inherit">
@@ -82,7 +86,7 @@ const LoginForm = () => {
           <Grid item>
             <Typography style = {{ marginTop: 10 }}>
               Don&#x27;t have an account? &#160;
-              <Link>
+              <Link component={RouterLink} to="/register">
                 Register
               </Link>
             </Typography>
