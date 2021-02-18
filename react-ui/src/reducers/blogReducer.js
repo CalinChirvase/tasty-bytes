@@ -10,10 +10,22 @@ export const getAll = () => {
   }
 }
 
+export const likeBlog = (id, newBlog) => {
+  return async dispatch => {
+    await blogService.update(id, newBlog)
+    dispatch({
+      type: 'LIKE_BLOG',
+      data: newBlog
+    })
+  }
+}
+
 const blogReducer = (state= [], action) => {
   switch(action.type) {
   case 'GET_BLOGS':
     return action.data
+  case 'LIKE_BLOG':
+    return state.map(blog => blog.id === action.data.id ?  action.data : blog)
   default:
     return state
   }
