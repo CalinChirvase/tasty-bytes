@@ -15,6 +15,7 @@ import { useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import { login } from '../reducers/loginReducer'
 import loginService from '../services/login'
+import blogService from '../services/blogs'
 
 
 const styles = {
@@ -37,6 +38,7 @@ const LoginForm = () => {
       //login user and update state
       const response = await loginService.login(username, password)
       dispatch(login(response))
+      blogService.setToken(response.token)
       history.push('/')
     } catch (error) {
       //display alert if login fails
@@ -48,7 +50,7 @@ const LoginForm = () => {
   return (
     <div>
       <Grid container direction="column" alignContent="center">
-        <Paper style={styles.paper}>
+        <Paper style={styles.paper} elevation={7}>
           <Grid item>
             {notification !== ''
               ? <Alert severity="error">{notification}</Alert>

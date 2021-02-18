@@ -61,6 +61,11 @@ const NavBar = () => {
                 Home
             </Typography>
           </Button>
+          <Button color="inherit" component={Link} to="/blogs">
+            <Typography variant="h6" color="inherit">
+                Blogs
+            </Typography>
+          </Button>
           <Button onClick={() => handleLogout()} color="inherit" component={Link} to="/">
             <Typography variant="h6" color="inherit">
               Logout

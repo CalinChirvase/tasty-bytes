@@ -5,6 +5,7 @@ import NavBar from './components/NavBar'
 import LoginForm from './components/LoginForm'
 import Home from './components/Home'
 import CreateAccount from './components/CreateAccount'
+import BlogList from './components/BlogList'
 //import Image from './assets/test-image.jpg'
 import { ThemeProvider } from '@material-ui/styles'
 import theme from './components/theme'
@@ -25,6 +26,9 @@ const App = () => {
       <Container>
         <NavBar />
         <Switch>
+          <Route path='/blogs'>
+            <BlogList />
+          </Route>
           <Route path='/register'>
             <CreateAccount />
           </Route>

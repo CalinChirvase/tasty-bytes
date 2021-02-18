@@ -39,7 +39,6 @@ test('a valid blog can be added', async () => {
     const newBlog = {
         title: 'Hello World!',
         author: 'Hello Worlder',
-        url: 'hello.com',
         likes: 45782
     }
   
@@ -63,7 +62,6 @@ test('a valid blog can be added', async () => {
 test('blog without author is not added', async () => {
     const newBlog = {
         title: 'Annonymous',
-        url: 'secret.com',
         likes: 0
     }
   
@@ -76,7 +74,7 @@ test('blog without author is not added', async () => {
     expect(blogsAtEnd).toHaveLength(helper.initialBlogs.length)
 })
 
-test('blog without title and url is not added', async () => {
+test('blog without title is not added', async () => {
     const newBlog = {
         author: 'joker',
         likes: 0
@@ -94,8 +92,7 @@ test('blog without title and url is not added', async () => {
 test('blog with no likes defaults to 0 likes', async () => {
     const newBlog = {
         title: 'NoLikeMe',
-        author: 'KaptainKool',
-        url: 'sad.com'
+        author: 'KaptainKool'
     }
 
     await api

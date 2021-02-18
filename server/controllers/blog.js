@@ -36,7 +36,6 @@ blogRouter.post('/', async (request, response) => {
     const blog = new Blog({
         title: body.title,
         author: body.author,
-        url: body.url,
         likes: body.likes === undefined ? 0 : body.likes,
         user: user._id
     })
@@ -52,7 +51,6 @@ blogRouter.put('/:id', (request, response) => {
     const blog = {
         title: body.title,
         author: body.author,
-        url: body.url,
         likes: body.likes
     }
   

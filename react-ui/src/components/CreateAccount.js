@@ -34,7 +34,7 @@ const CreateAccount = () => {
   }
   return (
     <Grid container direction="column" alignContent="center">
-      <Paper style={styles.paper}>
+      <Paper style={styles.paper} elevation={7}>
         <Grid item>
           <Typography variant="h6" color="inherit">
             Create a new account
