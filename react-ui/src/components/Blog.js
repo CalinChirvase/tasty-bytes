@@ -21,7 +21,7 @@ const Blog = () => {
 
   }
   return (
-    <React.Fragment>
+    <div>
       <Paper>
         <Typography color="inherit" variant="h2">
           {blog.title} by {blog.author}
@@ -39,7 +39,7 @@ const Blog = () => {
       <Button style = {{ marginTop: 10 }} color="primary" variant="contained" component={Link} to="/blogs">
         Back
       </Button>
-    </React.Fragment>
+    </div>
   )
 }
 

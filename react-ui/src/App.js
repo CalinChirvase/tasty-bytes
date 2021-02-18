@@ -1,15 +1,18 @@
 import React from 'react'
-import { Container } from '@material-ui/core'
 import { Switch, Route } from 'react-router-dom'
+
+//import Image from './assets/test-image.jpg'
+import { ThemeProvider } from '@material-ui/styles'
+import { Container } from '@material-ui/core'
+
 import NavBar from './components/NavBar'
 import LoginForm from './components/LoginForm'
 import Home from './components/Home'
 import CreateAccount from './components/CreateAccount'
 import BlogList from './components/BlogList'
 import Blog from './components/Blog'
-//import Image from './assets/test-image.jpg'
-import { ThemeProvider } from '@material-ui/styles'
 import theme from './components/theme'
+import CreateBlog from './components/CreateBlog'
 //import { withStyles } from '@material-ui/core/styles'
 
 /*const styles = {
@@ -27,6 +30,9 @@ const App = () => {
       <Container>
         <NavBar />
         <Switch>
+          <Route path='/blogs/create'>
+            <CreateBlog />
+          </Route>
           <Route path='/blogs/:id'>
             <Blog />
           </Route>

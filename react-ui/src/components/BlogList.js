@@ -12,6 +12,7 @@ import TableRow from '@material-ui/core/TableRow'
 import TableCell from '@material-ui/core/TableCell'
 import TableBody from '@material-ui/core/TableBody'
 import Link from '@material-ui/core/Link'
+import Button from '@material-ui/core/Button'
 
 const useStyles = makeStyles({
   table: {
@@ -31,28 +32,33 @@ const BlogList = () => {
   }, [dispatch])
 
   return (
-    <TableContainer className={classes.table} component={Paper} elevation={7} color="secondary">
-      <Table aria-label="simple table">
-        <TableHead>
-          <TableRow>
-            <TableCell>Title</TableCell>
-            <TableCell align="right">Author</TableCell>
-            <TableCell align="right">Likes</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {blogs.map(blog =>
-            <TableRow key={blog.title}>
-              <TableCell>
-                <Link component={RouterLink} to={`/blogs/${blog.id}`}>{blog.title}</Link>
-              </TableCell>
-              <TableCell align="right">{blog.author}</TableCell>
-              <TableCell align="right">{blog.likes}</TableCell>
+    <div>
+      <TableContainer className={classes.table} component={Paper} elevation={7} color="secondary">
+        <Table aria-label="simple table">
+          <TableHead>
+            <TableRow>
+              <TableCell>Title</TableCell>
+              <TableCell align="right">Author</TableCell>
+              <TableCell align="right">Likes</TableCell>
             </TableRow>
-          )}
-        </TableBody>
-      </Table>
-    </TableContainer>
+          </TableHead>
+          <TableBody>
+            {blogs.map(blog =>
+              <TableRow key={blog.title}>
+                <TableCell>
+                  <Link component={RouterLink} to={`/blogs/${blog.id}`}>{blog.title}</Link>
+                </TableCell>
+                <TableCell align="right">{blog.author}</TableCell>
+                <TableCell align="right">{blog.likes}</TableCell>
+              </TableRow>
+            )}
+          </TableBody>
+        </Table>
+      </TableContainer>
+      <Button style = {{ marginTop: 10 }} color="primary" variant="contained" component={RouterLink} to="/blogs/create">
+          Create new blog
+      </Button>
+    </div>
   )
 }
 
