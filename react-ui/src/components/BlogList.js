@@ -1,6 +1,7 @@
 import { React, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getAll } from '../reducers/blogReducer'
+import { Link as RouterLink } from 'react-router-dom'
 
 import { makeStyles } from '@material-ui/core/styles'
 import Paper from '@material-ui/core/Paper'
@@ -10,6 +11,7 @@ import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
 import TableCell from '@material-ui/core/TableCell'
 import TableBody from '@material-ui/core/TableBody'
+import Link from '@material-ui/core/Link'
 
 const useStyles = makeStyles({
   table: {
@@ -41,7 +43,9 @@ const BlogList = () => {
         <TableBody>
           {blogs.map(blog =>
             <TableRow key={blog.title}>
-              <TableCell>{blog.title}</TableCell>
+              <TableCell>
+                <Link component={RouterLink} to={`/blogs/${blog.id}`}>{blog.title}</Link>
+              </TableCell>
               <TableCell align="right">{blog.author}</TableCell>
               <TableCell align="right">{blog.likes}</TableCell>
             </TableRow>

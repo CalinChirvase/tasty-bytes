@@ -5,13 +5,13 @@ const initialBlogs = [
     {
         title: 'The Best Blog',
         author: 'Blogger McBlogg',
-        url: 'thatblog.com',
+        content: 'Hello this is a good blog!',
         likes: 9001
     },
     {
         title: 'The Real Best Blog',
         author: 'Blogger OBlogger',
-        url: 'thatrealblog.com',
+        content: 'Not much',
         likes: 5
     }
 ]
@@ -21,7 +21,7 @@ const nonExistingId = async () => {
         { 
             title: 'notone',
             author: 'noone', 
-            url: 'nope.ca',
+            content: 'nope',
             likes: 1 
         })
     await blog.save()
