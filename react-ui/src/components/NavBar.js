@@ -28,6 +28,29 @@ const NavBar = () => {
     dispatch(logout())
   }
 
+  if (!user.isLoggedIn) {
+    return (
+      <React.Fragment>
+        <AppBar position="fixed" color="primary">
+          <Toolbar>
+            <img src={logo} alt="website logo" className={classes.logo} />
+            <Button color="inherit" component={Link} to="/">
+              <Typography variant="h6" color="inherit">
+                  Home
+              </Typography>
+            </Button>
+            <Button color="inherit" component={Link} to="/login">
+              <Typography variant="h6" color="inherit">
+                Login
+              </Typography>
+            </Button>
+          </Toolbar>
+        </AppBar>
+        <div className={classes.toolbarMargin} />
+      </React.Fragment>
+    )
+  }
+
   return (
     <React.Fragment>
       <AppBar position="fixed" color="primary">
@@ -38,20 +61,16 @@ const NavBar = () => {
                 Home
             </Typography>
           </Button>
-          {user.token === undefined
-            ?
-            <Button color="inherit" component={Link} to="/login">
-              <Typography variant="h6" color="inherit">
-                Login
-              </Typography>
-            </Button>
-            :
-            <Button onClick={() => handleLogout()} color="inherit" component={Link} to="/">
-              <Typography variant="h6" color="inherit">
-                Logout
-              </Typography>
-            </Button>
-          }
+          <Button color="inherit" component={Link} to="/blogs">
+            <Typography variant="h6" color="inherit">
+                Blogs
+            </Typography>
+          </Button>
+          <Button onClick={() => handleLogout()} color="inherit" component={Link} to="/">
+            <Typography variant="h6" color="inherit">
+              Logout
+            </Typography>
+          </Button>
         </Toolbar>
       </AppBar>
       <div className={classes.toolbarMargin} />

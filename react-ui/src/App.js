@@ -1,38 +1,47 @@
-import { React, useEffect } from 'react'
-import { Container } from '@material-ui/core'
+import React from 'react'
 import { Switch, Route } from 'react-router-dom'
+
+//import Image from './assets/test-image.jpg'
+import { ThemeProvider } from '@material-ui/styles'
+import { Container } from '@material-ui/core'
+
 import NavBar from './components/NavBar'
 import LoginForm from './components/LoginForm'
 import Home from './components/Home'
-//import Image from './assets/test-image.jpg'
-import { ThemeProvider } from '@material-ui/styles'
+import CreateAccount from './components/CreateAccount'
+import BlogList from './components/BlogList'
+import Blog from './components/Blog'
 import theme from './components/theme'
+import CreateBlog from './components/CreateBlog'
 //import { withStyles } from '@material-ui/core/styles'
-import blogService from './services/blogs'
 
-//const styles = {
-//  '@global': {
-//    body: {
-//      backgroundImage: `url(${Image})`,
-//      backgroundSize: 'cover'
-//    }
-//  }
-//}
-const App = () => {
-
-  useEffect(() => {
-    const loggedUserJSON = window.localStorage.getItem('loggedTastyBytesUser')
-    if (loggedUserJSON) {
-      const user = JSON.parse(loggedUserJSON)
-      blogService.setToken(user.token)
+/*const styles = {
+  '@global': {
+    body: {
+      backgroundImage: `url(${Image})`,
+      backgroundSize: 'cover'
     }
-  }, [])
+  }
+}*/
+const App = () => {
 
   return (
     <ThemeProvider theme={theme}>
       <Container>
         <NavBar />
         <Switch>
+          <Route path='/blogs/create'>
+            <CreateBlog />
+          </Route>
+          <Route path='/blogs/:id'>
+            <Blog />
+          </Route>
+          <Route path='/blogs'>
+            <BlogList />
+          </Route>
+          <Route path='/register'>
+            <CreateAccount />
+          </Route>
           <Route path='/login'>
             <LoginForm />
           </Route>
