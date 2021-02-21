@@ -29,20 +29,20 @@ const useStyles = makeStyles(theme => ({
   tab: {
     ...theme.typography.tab,
     minWidth: 10,
-    marginLeft: '25px'
+    marginLeft: theme.spacing(2.5)
   }
 }))
 
 
 const LoginNavBar = () => {
   const [tabValue, setTabValue] = useState(0)
-
   const classes = useStyles()
 
   const handleTabChange = (_event, value) => {
     setTabValue(value)
   }
 
+  //ensure url path is still correctly displayed if user refreshes the browser tab
   useEffect(() => {
     if (window.location.pathname === '/' && tabValue !== 0) {
       setTabValue(0)
@@ -71,12 +71,14 @@ const LoginNavBar = () => {
             onChange={handleTabChange}
           >
             <Tab
+              disableRipple
               className={classes.tab}
               label="Home"
               component={Link}
               to="/"
             />
             <Tab
+              disableRipple
               className={classes.tab}
               label="Login"
               component={Link}

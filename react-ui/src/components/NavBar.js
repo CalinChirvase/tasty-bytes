@@ -12,14 +12,13 @@ import Toolbar from '@material-ui/core/Toolbar'
 import Tabs from '@material-ui/core/Tabs'
 import Tab from '@material-ui/core/Tab'
 import Button from '@material-ui/core/Button'
-import Menu from '@material-ui/core/Menu'
 import MenuItem from '@material-ui/core/MenuItem'
-//import MenuList from '@material-ui/core/MenuList'
-//import Paper from '@material-ui/core/Paper'
+import MenuList from '@material-ui/core/MenuList'
+import Paper from '@material-ui/core/Paper'
 import AccountCircleIcon from '@material-ui/icons/AccountCircle'
-//import Popper from '@material-ui/core/Popper'
-//import Grow from '@material-ui/core/Grow'
-//import ClickAwayListener from '@material-ui/core/ClickAwayListener'
+import Popper from '@material-ui/core/Popper'
+import Grow from '@material-ui/core/Grow'
+import ClickAwayListener from '@material-ui/core/ClickAwayListener'
 
 const useStyles = makeStyles(theme => ({
   toolbarMargin: {
@@ -41,7 +40,7 @@ const useStyles = makeStyles(theme => ({
   tab: {
     ...theme.typography.tab,
     minWidth: 10,
-    marginLeft: '25px'
+    marginLeft: theme.spacing(2.5)
   },
   menu: {
     backgroundColor: theme.palette.common.blue,
@@ -124,63 +123,80 @@ const NavBar = () => {
             onChange={handleTabChange}
           >
             <Tab
+              disableRipple
               className={classes.tab}
               label="Home"
               component={Link}
               to="/"
             />
             <Tab
+              disableRipple
               className={classes.tab}
               label="Blogs"
               component={Link}
               to="/blogs"
             />
             <Tab
+              disableRipple
               icon={<AccountCircleIcon />}
               aria-label="account-circle"
               className={classes.tab}
               onClick={handleProfileClick}
-              aria-owns={anchorEl ? 'profile menu' : undefined}
+              aria-owns={anchorEl ? 'profile-menu' : undefined}
               aria-haspopup={anchorEl ? true : undefined}
             >
             </Tab>
           </Tabs>
-          <Menu
-            id="profile-menu"
-            anchorEl={anchorEl}
-            classes={{ paper: classes.menu }}
+          <Popper
             open={open}
-            onClose={handleProfileClose}
-            elevation={0}
-          >
-            <MenuItem
-              component={Link}
-              to="/users/myprofile"
-              classes={{ root: classes.menuItem }}
-              onClick={() => {
-                handleProfileItemClick(0)
-                setTabValue(2)
-                handleProfileClose()
-              }}
-              selected={selectedProfileIndex === 0}
-            >
-              My Profile
-            </MenuItem>
-            <MenuItem
-              component={Link}
-              to="/"
-              classes={{ root: classes.menuItem }}
-              onClick={() => {
-                handleProfileItemClick(1)
-                setTabValue(0)
-                handleProfileClose()
-                handleLogout()
-              }}
-              selected={selectedProfileIndex === 1}
-            >
-              Logout
-            </MenuItem>
-          </Menu>
+            anchorEl={anchorEl}
+            transition
+            disablePortal>
+            {({ TransitionProps, placement }) => (
+              <Grow
+                {...TransitionProps}
+                style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}
+              >
+                <Paper>
+                  <ClickAwayListener onClickAway={handleProfileClose}>
+                    <MenuList
+                      autoFocusItem={open}
+                      id="profile=menu"
+                      className={classes.menu}
+                    >
+                      <MenuItem
+                        component={Link}
+                        to="/users/myprofile"
+                        classes={{ root: classes.menuItem }}
+                        onClick={() => {
+                          handleProfileItemClick(0)
+                          setTabValue(2)
+                          handleProfileClose()
+                        }}
+                        selected={selectedProfileIndex === 0}
+                      >
+                        My Profile
+                      </MenuItem>
+                      <MenuItem
+                        component={Link}
+                        to="/"
+                        classes={{ root: classes.menuItem }}
+                        onClick={() => {
+                          handleProfileItemClick(1)
+                          setTabValue(0)
+                          handleProfileClose()
+                          handleLogout()
+                        }}
+                        selected={selectedProfileIndex === 1}
+                      >
+                        Logout
+                      </MenuItem>
+                    </MenuList>
+                  </ClickAwayListener>
+                </Paper>
+              </Grow>
+            )}
+          </Popper>
         </Toolbar>
       </AppBar>
       <div className={classes.toolbarMargin} />
