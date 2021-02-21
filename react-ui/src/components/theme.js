@@ -23,7 +23,7 @@ const theme = createMuiTheme({
       fontFamily: 'Raleway',
       textTransform: 'none',
       fontWeight: 700,
-      fontSize: '1.4rem',
+      fontSize: '1.1rem',
     }
   },
   status: {
