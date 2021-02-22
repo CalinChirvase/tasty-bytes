@@ -32,7 +32,7 @@ const useStyles = makeStyles(theme => ({
     }
   },
   logo: {
-    height: '8em'
+    height: '6.5rem'
   },
   tabContainer: {
     marginLeft: 'auto'
@@ -50,10 +50,14 @@ const useStyles = makeStyles(theme => ({
   },
   menuItem: {
     ...theme.typography.tab,
-    opacity: 0.7,
+    opacity: 0.6,
     '&:hover': {
       opacity: 1
     }
+  },
+  profileIcon: {
+    height: '1.8rem',
+    width: '1.8rem'
   }
 }))
 
@@ -98,8 +102,10 @@ const NavBar = () => {
       setTabValue(0)
     } else if (window.location.pathname === '/blogs' && tabValue !== 1) {
       setTabValue(1)
-    } else if (window.location.pathname === '/users/myprofile' && tabValue !== 2) {
+    } else if (window.location.pathname === '/contact' && tabValue !== 2) {
       setTabValue(2)
+    } else if (window.location.pathname === '/users/myprofile' && tabValue !== 3) {
+      setTabValue(3)
     }
 
   },[tabValue])
@@ -138,7 +144,14 @@ const NavBar = () => {
             />
             <Tab
               disableRipple
-              icon={<AccountCircleIcon />}
+              className={classes.tab}
+              label="Contact Us"
+              component={Link}
+              to="/contact"
+            />
+            <Tab
+              disableRipple
+              icon={<AccountCircleIcon className={classes.profileIcon} />}
               aria-label="account-circle"
               className={classes.tab}
               onClick={handleProfileClick}
@@ -170,7 +183,7 @@ const NavBar = () => {
                         classes={{ root: classes.menuItem }}
                         onClick={() => {
                           handleProfileItemClick(0)
-                          setTabValue(2)
+                          setTabValue(3)
                           handleProfileClose()
                         }}
                         selected={selectedProfileIndex === 0}

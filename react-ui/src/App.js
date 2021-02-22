@@ -4,7 +4,6 @@ import { useSelector } from 'react-redux'
 
 //import Image from './assets/test-image.jpg'
 import { ThemeProvider } from '@material-ui/styles'
-import { Container } from '@material-ui/core'
 
 import NavBar from './components/NavBar'
 import LoginNavBar from './components/LoginNavBar'
@@ -16,6 +15,8 @@ import Blog from './components/Blog'
 import theme from './components/theme'
 import CreateBlog from './components/CreateBlog'
 import MyProfile from './components/MyProfile'
+import Contact from './components/Contact'
+import Footer from './components/Footer'
 //import { withStyles } from '@material-ui/core/styles'
 
 /*const styles = {
@@ -32,36 +33,38 @@ const App = () => {
 
   return (
     <ThemeProvider theme={theme}>
-      <Container>
-        {user.isLoggedIn
-          ?
-          <NavBar />
-          :
-          <LoginNavBar />}
-        <Switch>
-          <Route path='/users/myprofile'>
-            <MyProfile />
-          </Route>
-          <Route path='/blogs/create'>
-            <CreateBlog />
-          </Route>
-          <Route path='/blogs/:id'>
-            <Blog />
-          </Route>
-          <Route path='/blogs'>
-            <BlogList />
-          </Route>
-          <Route path='/register'>
-            <CreateAccount />
-          </Route>
-          <Route path='/login'>
-            <LoginForm />
-          </Route>
-          <Route path='/'>
-            <Home />
-          </Route>
-        </Switch>
-      </Container>
+      {user.isLoggedIn
+        ?
+        <NavBar />
+        :
+        <LoginNavBar />}
+      <Switch>
+        <Route path='/contact'>
+          <Contact />
+        </Route>
+        <Route path='/users/myprofile'>
+          <MyProfile />
+        </Route>
+        <Route path='/blogs/create'>
+          <CreateBlog />
+        </Route>
+        <Route path='/blogs/:id'>
+          <Blog />
+        </Route>
+        <Route path='/blogs'>
+          <BlogList />
+        </Route>
+        <Route path='/register'>
+          <CreateAccount />
+        </Route>
+        <Route path='/login'>
+          <LoginForm />
+        </Route>
+        <Route path='/'>
+          <Home />
+        </Route>
+      </Switch>
+      <Footer />
     </ThemeProvider>
   )
 }
