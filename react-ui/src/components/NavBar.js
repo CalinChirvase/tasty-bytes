@@ -1,76 +1,215 @@
-import React from 'react'
-import { AppBar, Toolbar, Typography } from '@material-ui/core'
-import Button from '@material-ui/core/Button'
+//react libraries imports
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { makeStyles } from '@material-ui/styles'
 import logo from '../assets/logo.png'
 import { logout } from '../reducers/loginReducer'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
+
+//material-ui imports
+import { makeStyles } from '@material-ui/styles'
+import AppBar from '@material-ui/core/AppBar'
+import Toolbar from '@material-ui/core/Toolbar'
+import Tabs from '@material-ui/core/Tabs'
+import Tab from '@material-ui/core/Tab'
+import Button from '@material-ui/core/Button'
+import MenuItem from '@material-ui/core/MenuItem'
+import MenuList from '@material-ui/core/MenuList'
+import Paper from '@material-ui/core/Paper'
+import AccountCircleIcon from '@material-ui/icons/AccountCircle'
+import Popper from '@material-ui/core/Popper'
+import Grow from '@material-ui/core/Grow'
+import ClickAwayListener from '@material-ui/core/ClickAwayListener'
 
 const useStyles = makeStyles(theme => ({
   toolbarMargin: {
     ...theme.mixins.toolbar,
     marginBottom: '3em'
   },
+  logoContainer: {
+    padding: 0,
+    '&:hover': {
+      backgroundColor: 'transparent'
+    }
+  },
   logo: {
-    height: '7em'
+    height: '6.5rem'
+  },
+  tabContainer: {
+    marginLeft: 'auto'
+  },
+  tab: {
+    ...theme.typography.tab,
+    minWidth: 10,
+    marginLeft: theme.spacing(2.5)
+  },
+  menu: {
+    backgroundColor: theme.palette.common.blue,
+    color: 'white',
+    borderRadius: '0px'
+
+  },
+  menuItem: {
+    ...theme.typography.tab,
+    opacity: 0.6,
+    '&:hover': {
+      opacity: 1
+    }
+  },
+  profileIcon: {
+    height: '1.8rem',
+    width: '1.8rem'
   }
 }))
 
 
 const NavBar = () => {
+  const [tabValue, setTabValue] = useState(0)
+  const [anchorEl, setAnchorEl] = useState(null)
+  const [open, setOpen] = useState(false)
+  const [selectedProfileIndex, setSelectedProfileIndex] = useState(0)
 
   const dispatch = useDispatch()
   const classes = useStyles()
-  const user = useSelector(state => state.user)
 
   const handleLogout = () => {
     dispatch(logout())
+    setTabValue(0)
   }
 
-  if (!user.isLoggedIn) {
-    return (
-      <React.Fragment>
-        <AppBar position="fixed" color="primary">
-          <Toolbar>
-            <img src={logo} alt="website logo" className={classes.logo} />
-            <Button color="inherit" component={Link} to="/">
-              <Typography variant="h6" color="inherit">
-                  Home
-              </Typography>
-            </Button>
-            <Button color="inherit" component={Link} to="/login">
-              <Typography variant="h6" color="inherit">
-                Login
-              </Typography>
-            </Button>
-          </Toolbar>
-        </AppBar>
-        <div className={classes.toolbarMargin} />
-      </React.Fragment>
-    )
+  const handleTabChange = (_event, value) => {
+    setTabValue(value)
   }
+
+  const handleProfileClick = (event) => {
+    setAnchorEl(event.currentTarget)
+    setOpen(true)
+  }
+
+  const handleProfileClose = () => {
+    setAnchorEl(null)
+    setOpen(false)
+  }
+
+  const handleProfileItemClick = (_event, index) => {
+    setAnchorEl(null)
+    setOpen(false)
+    setSelectedProfileIndex(index)
+  }
+
+  //ensure url path is still correctly displayed if user refreshes the browser tab
+  useEffect(() => {
+    if (window.location.pathname === '/' && tabValue !== 0) {
+      setTabValue(0)
+    } else if (window.location.pathname === '/blogs' && tabValue !== 1) {
+      setTabValue(1)
+    } else if (window.location.pathname === '/contact' && tabValue !== 2) {
+      setTabValue(2)
+    } else if (window.location.pathname === '/users/myprofile' && tabValue !== 3) {
+      setTabValue(3)
+    }
+
+  },[tabValue])
 
   return (
     <React.Fragment>
       <AppBar position="fixed" color="primary">
         <Toolbar>
-          <img src={logo} alt="website logo" className={classes.logo} />
-          <Button color="inherit" component={Link} to="/">
-            <Typography variant="h6" color="inherit">
-                Home
-            </Typography>
+          <Button
+            className={classes.logoContainer}
+            component={Link}
+            to="/"
+            disableRipple
+            onClick={() => setTabValue(0)}
+          >
+            <img src={logo} alt="website logo" className={classes.logo} />
           </Button>
-          <Button color="inherit" component={Link} to="/blogs">
-            <Typography variant="h6" color="inherit">
-                Blogs
-            </Typography>
-          </Button>
-          <Button onClick={() => handleLogout()} color="inherit" component={Link} to="/">
-            <Typography variant="h6" color="inherit">
-              Logout
-            </Typography>
-          </Button>
+          <Tabs
+            className={classes.tabContainer}
+            value={tabValue}
+            onChange={handleTabChange}
+          >
+            <Tab
+              disableRipple
+              className={classes.tab}
+              label="Home"
+              component={Link}
+              to="/"
+            />
+            <Tab
+              disableRipple
+              className={classes.tab}
+              label="Blogs"
+              component={Link}
+              to="/blogs"
+            />
+            <Tab
+              disableRipple
+              className={classes.tab}
+              label="Contact Us"
+              component={Link}
+              to="/contact"
+            />
+            <Tab
+              disableRipple
+              icon={<AccountCircleIcon className={classes.profileIcon} />}
+              aria-label="account-circle"
+              className={classes.tab}
+              onClick={handleProfileClick}
+              aria-owns={anchorEl ? 'profile-menu' : undefined}
+              aria-haspopup={anchorEl ? true : undefined}
+            >
+            </Tab>
+          </Tabs>
+          <Popper
+            open={open}
+            anchorEl={anchorEl}
+            transition
+            disablePortal>
+            {({ TransitionProps, placement }) => (
+              <Grow
+                {...TransitionProps}
+                style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}
+              >
+                <Paper>
+                  <ClickAwayListener onClickAway={handleProfileClose}>
+                    <MenuList
+                      autoFocusItem={open}
+                      id="profile=menu"
+                      className={classes.menu}
+                    >
+                      <MenuItem
+                        component={Link}
+                        to="/users/myprofile"
+                        classes={{ root: classes.menuItem }}
+                        onClick={() => {
+                          handleProfileItemClick(0)
+                          setTabValue(3)
+                          handleProfileClose()
+                        }}
+                        selected={selectedProfileIndex === 0}
+                      >
+                        My Profile
+                      </MenuItem>
+                      <MenuItem
+                        component={Link}
+                        to="/"
+                        classes={{ root: classes.menuItem }}
+                        onClick={() => {
+                          handleProfileItemClick(1)
+                          setTabValue(0)
+                          handleProfileClose()
+                          handleLogout()
+                        }}
+                        selected={selectedProfileIndex === 1}
+                      >
+                        Logout
+                      </MenuItem>
+                    </MenuList>
+                  </ClickAwayListener>
+                </Paper>
+              </Grow>
+            )}
+          </Popper>
         </Toolbar>
       </AppBar>
       <div className={classes.toolbarMargin} />
