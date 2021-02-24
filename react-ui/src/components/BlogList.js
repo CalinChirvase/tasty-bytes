@@ -29,7 +29,9 @@ const useStyles = makeStyles({
   },
   buttonContainer:{
     minWidth: 900,
-    maxWidth: 1200
+    maxWidth: 1200,
+    marginTop: '1.5rem',
+    marginBottom: '2rem'
   }
 })
 
@@ -130,7 +132,6 @@ const BlogList = () => {
         >
           <Grid item>
             <Button
-              style = {{ marginTop: 15 }}
               color="primary" variant="contained"
               component={RouterLink}
               to="/blogs/create"
