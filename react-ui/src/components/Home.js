@@ -23,7 +23,6 @@ const useStyles = makeStyles(theme => ({
     color: theme.palette.common.blue
   },
   image: {
-    marginTop: '6.5%',
     marginLeft: '3rem'
   },
   button: {
@@ -40,6 +39,9 @@ const useStyles = makeStyles(theme => ({
   },
   buttonContainer: {
     marginTop: '1rem'
+  },
+  mainContainer: {
+    flex: 1
   }
 }))
 
@@ -47,7 +49,12 @@ const Home = () => {
   const user = useSelector(state => state.user)
   const classes = useStyles()
   return (
-    <Grid container justify="space-evenly" alignItems="center" direction="row">
+    <Grid container
+      justify="space-evenly"
+      alignItems="center"
+      direction="row"
+      className={classes.mainContainer}
+    >
       <Grid item>
         <Typography className={classes.slogan} variant="h2" color="inherit" align="center">
         Tech Blogs, <br /> One Byte at a Time

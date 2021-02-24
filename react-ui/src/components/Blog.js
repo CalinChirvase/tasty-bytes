@@ -17,8 +17,8 @@ const useStyles = makeStyles({
     minWidth: 500,
     maxWidth: 800,
     padding: 30,
-    marginTop: '2rem',
-    marginBottom: '2rem'
+    marginBottom: '3rem',
+    marginTop: '2rem'
   },
   contentContainer: {
     marginTop: '1rem'
@@ -31,6 +31,9 @@ const useStyles = makeStyles({
   },
   likeButtonContainer: {
     marginTop: '1rem'
+  },
+  mainContainer: {
+    flex: 1
   }
 })
 const Blog = () => {
@@ -45,7 +48,7 @@ const Blog = () => {
 
   }
   return (
-    <Grid container justify="center" alignItems="center">
+    <Grid container justify="center" alignItems="center" className={classes.mainContainer}>
       <Grid item>
         <Paper elevation={7} className={classes.paperContainer}>
           <Grid container justify="center" direction="column" className={classes.contentContainer}>

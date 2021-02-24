@@ -32,6 +32,10 @@ const useStyles = makeStyles({
     maxWidth: 1200,
     marginTop: '1.5rem',
     marginBottom: '2rem'
+  },
+  mainContainer: {
+    marginBottom: '5rem',
+    flex: 1
   }
 })
 
@@ -64,6 +68,7 @@ const BlogList = () => {
       direction="column"
       alignItems="center"
       justify="center"
+      className={classes.mainContainer}
     >
       <Grid item>
         <TableContainer
