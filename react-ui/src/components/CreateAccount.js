@@ -1,4 +1,7 @@
 import React from 'react'
+import { useHistory } from 'react-router-dom'
+import { Link } from 'react-router-dom'
+
 import Paper from '@material-ui/core/Paper'
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
@@ -7,19 +10,26 @@ import Button from '@material-ui/core/Button'
 import { makeStyles } from '@material-ui/core/styles'
 
 import userService from '../services/users'
-import { useHistory } from 'react-router-dom'
-import { Link } from 'react-router-dom'
+import theme from './theme'
 
 const useStyles = makeStyles({
   mainContainer: {
     flex: 1
   },
   paper: {
-    padding: '6.5rem'
+    padding: '7.4rem'
   },
-  loginButton: {
-    marginTop: '1.5rem',
-    marginBottom: '1rem'
+  buttonContainer: {
+    marginTop: '1.5rem'
+  },
+  text: {
+    marginTop: '1.5rem'
+  },
+  canceButton: {
+    backgroundColor: theme.palette.common.red,
+    '&:hover': {
+      backgroundColor: theme.palette.common.red
+    }
   }
 })
 
@@ -53,6 +63,7 @@ const CreateAccount = () => {
         <form onSubmit={handleCreate}>
           <Grid item>
             <TextField
+              className={classes.text}
               variant="standard"
               label="Username"
               autoComplete="username"
@@ -60,6 +71,7 @@ const CreateAccount = () => {
           </Grid>
           <Grid item>
             <TextField
+              className={classes.text}
               variant="standard"
               label="Name"
               autoComplete="name"
@@ -67,29 +79,37 @@ const CreateAccount = () => {
           </Grid>
           <Grid item>
             <TextField
+              className={classes.text}
               variant="standard"
               type="password"
               label="Password"
               autoComplete="new-password"
             />
           </Grid>
-          <Button
-            style = {{ marginTop: 10 }}
-            variant="contained"
-            color="primary"
-            type="submit"
-          >
-            Create
-          </Button>
+          <Grid item>
+            <Grid container spacing={4} className={classes.buttonContainer}>
+              <Grid item>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  type="submit"
+                >
+                  Create
+                </Button>
+              </Grid>
+              <Grid item>
+                <Button
+                  className={classes.canceButton}
+                  component={Link}
+                  to="/login"
+                  variant="contained"
+                  color="primary">
+                    Cancel
+                </Button>
+              </Grid>
+            </Grid>
+          </Grid>
         </form>
-        <Button
-          style = {{ marginTop: 10 }}
-          component={Link}
-          to="/login"
-          variant="contained"
-          color="primary">
-          Cancel
-        </Button>
       </Paper>
     </Grid>
   )

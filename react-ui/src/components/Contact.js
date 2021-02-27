@@ -22,7 +22,7 @@ const Contact = () => {
         <Paper elevation={7} className={classes.paper}>
           <Grid container direction="column" justify="center" alignContent="center" spacing={2}>
             <Grid item>
-              <Typography>
+              <Typography variant="h5">
                 Contact Us:
               </Typography>
             </Grid>

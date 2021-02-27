@@ -24,11 +24,14 @@ const useStyles = makeStyles({
     flex: 1
   },
   paper: {
-    padding: '6rem'
+    padding: '6.5rem'
   },
   loginButton: {
-    marginTop: '1.5rem',
+    marginTop: '2rem',
     marginBottom: '1rem'
+  },
+  text: {
+    marginTop:'1.5rem'
   }
 })
 
@@ -74,7 +77,7 @@ const LoginForm = () => {
         <form onSubmit={handleLogin}>
           <Grid item>
             <TextField
-              style = {{ marginTop: 20 }}
+              className={classes.text}
               variant="standard"
               label="Username"
               autoComplete="username"
@@ -82,23 +85,25 @@ const LoginForm = () => {
           </Grid>
           <Grid item>
             <TextField
-              style = {{ marginTop: 20 }}
+              className={classes.text}
               variant="standard"
               type="password"
               label="Password"
               autoComplete="current-password"
             />
           </Grid>
-          <Button
-            className={classes.loginButton}
-            variant="contained"
-            color="primary"
-            type="submit"
-          >Log In
-          </Button>
+          <Grid item>
+            <Button
+              className={classes.loginButton}
+              variant="contained"
+              color="primary"
+              type="submit"
+            >Log In
+            </Button>
+          </Grid>
         </form>
         <Grid item>
-          <Typography style = {{ marginTop: 20 }}>
+          <Typography className={classes.text}>
             Don&#x27;t have an account? &#160;
             <Link component={RouterLink} to="/register">
               Register
