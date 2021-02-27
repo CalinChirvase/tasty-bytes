@@ -1,9 +1,12 @@
 # Tasty Bytes
 
-A single page application for posting and sharing short blog posts. 
+A single page application for posting and sharing short tech blog posts.
+
+Deployed on [Heroku](https://www.heroku.com/), live version [here](https://tastybytes.herokuapp.com/).
 
 ## Frontend Built With:
-- [React](https://reactjs.org/) 
+- [React](https://reactjs.org/)
+- [Materil-UI](https://material-ui.com/)
 - [Redux](https://redux.js.org/)
 - [Axios](https://github.com/axios/axios)
 

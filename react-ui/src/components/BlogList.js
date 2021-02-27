@@ -1,7 +1,6 @@
 //react libraries imports
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { getAll } from '../reducers/blogReducer'
 import { Link as RouterLink } from 'react-router-dom'
 
 //material-ui imports
@@ -17,9 +16,10 @@ import TableFooter from '@material-ui/core/TableFooter'
 import Link from '@material-ui/core/Link'
 import Button from '@material-ui/core/Button'
 import Grid from '@material-ui/core/Grid'
+import { TablePagination } from '@material-ui/core'
 
 import TablePaginationActions from './TablePaginationActions'
-import { TablePagination } from '@material-ui/core'
+import { getAll } from '../reducers/blogReducer'
 
 const useStyles = makeStyles({
   table: {
