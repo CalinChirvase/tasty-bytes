@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux'
 
 //import Image from './assets/test-image.jpg'
 import { ThemeProvider } from '@material-ui/styles'
+import { makeStyles } from '@material-ui/core/styles'
 
 import NavBar from './components/NavBar'
 import LoginNavBar from './components/LoginNavBar'
@@ -27,45 +28,55 @@ import Footer from './components/Footer'
     }
   }
 }*/
-const App = () => {
 
+const useStyles = makeStyles({
+  mainWrapper: {
+    display: 'flex',
+    flexDirection: 'column',
+    minHeight: '100vh'
+  }
+})
+const App = () => {
+  const classes = useStyles()
   const user = useSelector(state => state.user)
 
   return (
-    <ThemeProvider theme={theme}>
-      {user.isLoggedIn
-        ?
-        <NavBar />
-        :
-        <LoginNavBar />}
-      <Switch>
-        <Route path='/contact'>
-          <Contact />
-        </Route>
-        <Route path='/users/myprofile'>
-          <MyProfile />
-        </Route>
-        <Route path='/blogs/create'>
-          <CreateBlog />
-        </Route>
-        <Route path='/blogs/:id'>
-          <Blog />
-        </Route>
-        <Route path='/blogs'>
-          <BlogList />
-        </Route>
-        <Route path='/register'>
-          <CreateAccount />
-        </Route>
-        <Route path='/login'>
-          <LoginForm />
-        </Route>
-        <Route path='/'>
-          <Home />
-        </Route>
-      </Switch>
-      <Footer />
-    </ThemeProvider>
+    <div className={classes.mainWrapper}>
+      <ThemeProvider theme={theme}>
+        {user.isLoggedIn
+          ?
+          <NavBar />
+          :
+          <LoginNavBar />}
+        <Switch>
+          <Route path='/contact'>
+            <Contact />
+          </Route>
+          <Route path='/users/myprofile'>
+            <MyProfile />
+          </Route>
+          <Route path='/blogs/create'>
+            <CreateBlog />
+          </Route>
+          <Route path='/blogs/:id'>
+            <Blog />
+          </Route>
+          <Route path='/blogs'>
+            <BlogList />
+          </Route>
+          <Route path='/register'>
+            <CreateAccount />
+          </Route>
+          <Route path='/login'>
+            <LoginForm />
+          </Route>
+          <Route path='/'>
+            <Home />
+          </Route>
+        </Switch>
+        <Footer />
+      </ThemeProvider>
+    </div>
   )
 }
 

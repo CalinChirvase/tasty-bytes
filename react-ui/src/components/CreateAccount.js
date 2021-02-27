@@ -4,17 +4,27 @@ import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
+import { makeStyles } from '@material-ui/core/styles'
 
 import userService from '../services/users'
 import { useHistory } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 
-const styles = {
-  paper: { padding: 100, marginTop: 100 }
-}
+const useStyles = makeStyles({
+  mainContainer: {
+    flex: 1
+  },
+  paper: {
+    padding: '6.5rem'
+  },
+  loginButton: {
+    marginTop: '1.5rem',
+    marginBottom: '1rem'
+  }
+})
 
 const CreateAccount = () => {
-
+  const classes = useStyles()
   const history = useHistory()
 
   const handleCreate = (event) => {
@@ -33,8 +43,8 @@ const CreateAccount = () => {
     }
   }
   return (
-    <Grid container direction="column" alignContent="center">
-      <Paper style={styles.paper} elevation={7}>
+    <Grid container direction="column" alignContent="center" justify="center" className={classes.mainContainer}>
+      <Paper className={classes.paper} elevation={7}>
         <Grid item>
           <Typography variant="h6" color="inherit">
             Create a new account
