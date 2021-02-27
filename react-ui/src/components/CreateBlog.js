@@ -5,23 +5,27 @@ import { useDispatch } from 'react-redux'
 import Paper from '@material-ui/core/Paper'
 import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
+import Grid from '@material-ui/core/Grid'
 import { makeStyles } from '@material-ui/core/styles'
 
 import { createBlog } from '../reducers/blogReducer'
 
-const styles = {
-  paper: { padding: 150, marginTop: 50 }
-}
-
 const useStyles = makeStyles((theme) => ({
-  root: {
-    display: 'flex',
-    flexWrap: 'wrap',
+  mainContainer: {
+    flex: 1
   },
-  textField: {
-    marginLeft: theme.spacing(1),
-    marginRight: theme.spacing(1),
-    width: '25ch',
+  paper: {
+    padding: 100,
+    width: '65rem'
+  },
+  button: {
+    backgroundColor: theme.palette.common.red,
+    '&:hover': {
+      backgroundColor: theme.palette.common.red
+    }
+  },
+  buttonContainer: {
+    marginTop: '0.6rem'
   }
 }))
 
@@ -39,42 +43,61 @@ const CreateBlog = () => {
     history.push('/blogs')
   }
   return (
-    <Paper style={styles.paper} elevation={7} className={classes.root}>
-      <TextField
-        onChange={({ target }) => setTitle(target.value)}
-        fullWidth
-        variant="outlined"
-        label="Title"
-      />
-      <TextField
-        onChange={({ target }) => setContent(target.value)}
-        fullWidth
-        style = {{ marginTop: 30 }}
-        variant="outlined"
-        multiline
-        rows={15}
-        label="Content"
-      />
-      <Button
-        onClick={() => handleCreate()}
-        style = {{ marginTop: 10 }}
-        variant="contained"
-        color="primary"
-        type="submit"
-      >
-        Create
-      </Button>
-      <Button
-        component={Link}
-        to="/blogs"
-        style = {{ marginTop: 10 }}
-        variant="contained"
-        color="primary"
-        type="submit"
-      >
-        Cancel
-      </Button>
-    </Paper>
+    <Grid container justify="center" alignContent="center" className={classes.mainContainer}>
+      <Grid item>
+        <Paper className={classes.paper} elevation={7}>
+          <Grid container direction="column">
+            <Grid item>
+              <TextField
+                onChange={({ target }) => setTitle(target.value)}
+                fullWidth
+                variant="outlined"
+                label="Title"
+              />
+            </Grid>
+            <Grid item>
+              <TextField
+                onChange={({ target }) => setContent(target.value)}
+                fullWidth
+                style = {{ marginTop: 30 }}
+                variant="outlined"
+                multiline
+                rows={15}
+                label="Content"
+              />
+            </Grid>
+            <Grid item>
+              <Grid container spacing={4} className={classes.buttonContainer}>
+                <Grid item>
+                  <Button
+                    onClick={() => handleCreate()}
+                    style = {{ marginTop: 10 }}
+                    variant="contained"
+                    color="primary"
+                    type="submit"
+                  >
+                    Create
+                  </Button>
+                </Grid>
+                <Grid item>
+                  <Button
+                    component={Link}
+                    to="/blogs"
+                    style = {{ marginTop: 10 }}
+                    variant="contained"
+                    color="primary"
+                    type="submit"
+                    className={classes.button}
+                  >
+                    Cancel
+                  </Button>
+                </Grid>
+              </Grid>
+            </Grid>
+          </Grid>
+        </Paper>
+      </Grid>
+    </Grid>
   )
 }
 

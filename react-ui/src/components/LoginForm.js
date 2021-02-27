@@ -8,6 +8,7 @@ import Grid from '@material-ui/core/Grid'
 import Button from '@material-ui/core/Button'
 import Link from '@material-ui/core/Link'
 import Alert from '@material-ui/lab/Alert'
+import { makeStyles } from '@material-ui/core/styles'
 
 
 import { Link as RouterLink } from 'react-router-dom'
@@ -18,11 +19,21 @@ import loginService from '../services/login'
 import blogService from '../services/blogs'
 
 
-const styles = {
-  paper: { padding: 100, marginTop: 100 }
-}
+const useStyles = makeStyles({
+  mainContainer: {
+    flex: 1
+  },
+  paper: {
+    padding: '6rem'
+  },
+  loginButton: {
+    marginTop: '1.5rem',
+    marginBottom: '1rem'
+  }
+})
 
 const LoginForm = () => {
+  const classes = useStyles()
   const [notification, setNotification] = useState('')
 
   const dispatch = useDispatch()
@@ -48,54 +59,54 @@ const LoginForm = () => {
   }
 
   return (
-    <div>
-      <Grid container direction="column" alignContent="center">
-        <Paper style={styles.paper} elevation={7}>
+    <Grid className={classes.mainContainer} container direction="column" justify="center" alignContent="center">
+      <Paper className={classes.paper} elevation={7}>
+        <Grid item>
+          {notification !== ''
+            ? <Alert severity="error">{notification}</Alert>
+            : <div></div>}
+        </Grid>
+        <Grid item>
+          <Typography variant="h6" color="inherit">
+            Welcome back!
+          </Typography>
+        </Grid>
+        <form onSubmit={handleLogin}>
           <Grid item>
-            {notification !== ''
-              ? <Alert severity="error">{notification}</Alert>
-              : <div></div>}
+            <TextField
+              style = {{ marginTop: 20 }}
+              variant="standard"
+              label="Username"
+              autoComplete="username"
+            />
           </Grid>
           <Grid item>
-            <Typography variant="h6" color="inherit">
-              Welcome back!
-            </Typography>
+            <TextField
+              style = {{ marginTop: 20 }}
+              variant="standard"
+              type="password"
+              label="Password"
+              autoComplete="current-password"
+            />
           </Grid>
-          <form onSubmit={handleLogin}>
-            <Grid item>
-              <TextField
-                variant="standard"
-                label="Username"
-                autoComplete="username"
-              />
-            </Grid>
-            <Grid item>
-              <TextField
-                variant="standard"
-                type="password"
-                label="Password"
-                autoComplete="current-password"
-              />
-            </Grid>
-            <Button
-              style = {{ marginTop: 10 }}
-              variant="contained"
-              color="primary"
-              type="submit"
-            >Login
-            </Button>
-          </form>
-          <Grid item>
-            <Typography style = {{ marginTop: 10 }}>
-              Don&#x27;t have an account? &#160;
-              <Link component={RouterLink} to="/register">
-                Register
-              </Link>
-            </Typography>
-          </Grid>
-        </Paper>
-      </Grid>
-    </div>
+          <Button
+            className={classes.loginButton}
+            variant="contained"
+            color="primary"
+            type="submit"
+          >Log In
+          </Button>
+        </form>
+        <Grid item>
+          <Typography style = {{ marginTop: 20 }}>
+            Don&#x27;t have an account? &#160;
+            <Link component={RouterLink} to="/register">
+              Register
+            </Link>
+          </Typography>
+        </Grid>
+      </Paper>
+    </Grid>
   )
 }
 

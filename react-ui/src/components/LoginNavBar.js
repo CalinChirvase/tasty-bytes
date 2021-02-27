@@ -80,7 +80,7 @@ const LoginNavBar = () => {
             <Tab
               disableRipple
               className={classes.tab}
-              label="Login"
+              label="Log In"
               component={Link}
               to="/login"
             />

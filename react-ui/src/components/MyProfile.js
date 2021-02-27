@@ -5,6 +5,9 @@ import Typography from '@material-ui/core/Typography'
 import Grid from '@material-ui/core/Grid'
 import Paper from '@material-ui/core/Paper'
 import { makeStyles } from '@material-ui/core/styles'
+import Link from '@material-ui/core/Link'
+
+import { Link as RouterLink } from 'react-router-dom'
 
 const useStyles = makeStyles({
   paper:{
@@ -24,17 +27,27 @@ const MyProfile = () => {
   return (
     <Grid container alignItems="center" direction="row" justify="center" className={classes.mainContainer}>
       <Paper elevation={7} className={classes.paper}>
-        <Typography>
+        <Typography variant="h5">
           Username: {user.username}
         </Typography>
-        <Typography>
+        <Typography variant="h5">
           Name: {user.name}
         </Typography>
         <br />
         <div>
-          My Blogs
+          <Typography variant="h5">
+            My Blogs:
+          </Typography>
+          <br />
           {blogs.map(blog =>
-            <p key={blog.title}>{blog.title}, Likes: {blog.likes}</p>
+            <div key={blog.title}>
+              <Link component={RouterLink} to={`/blogs/${blog.id}`}>
+                <Typography>
+                  {blog.title}, Likes: {blog.likes}
+                </Typography>
+              </Link>
+              <br />
+            </div>
           )}
         </div>
       </Paper>

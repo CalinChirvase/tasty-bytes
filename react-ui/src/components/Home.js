@@ -1,6 +1,7 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { Link as ScrollLink, Element } from 'react-scroll'
 
 import Typography from '@material-ui/core/Typography'
 import Grid from '@material-ui/core/Grid'
@@ -10,19 +11,10 @@ import { makeStyles } from '@material-ui/core/styles'
 import testImage from '../assets/test-image.jpg'
 
 const useStyles = makeStyles(theme => ({
-  imag: {
-    maxWidth: '25em',
-    minWidth: '12.5em',
-    marginTop: '2em',
-    marginLeft: '5%',
-    [theme.breakpoints.down('sm')]: {
-      maxWidth: '10em'
-    }
-  },
-  slogan: {
+  text: {
     color: theme.palette.common.blue
   },
-  image: {
+  imageContainer: {
     marginLeft: '3rem'
   },
   button: {
@@ -42,6 +34,13 @@ const useStyles = makeStyles(theme => ({
   },
   mainContainer: {
     flex: 1
+  },
+  learnMore: {
+    marginTop: '30rem',
+    marginBottom: '20rem'
+  },
+  sloganContainer: {
+    marginTop: '7%'
   }
 }))
 
@@ -49,53 +48,81 @@ const Home = () => {
   const user = useSelector(state => state.user)
   const classes = useStyles()
   return (
-    <Grid container
-      justify="space-evenly"
-      alignItems="center"
-      direction="row"
-      className={classes.mainContainer}
-    >
+    <Grid container className={classes.mainContainer} direction="column">
       <Grid item>
-        <Typography className={classes.slogan} variant="h2" color="inherit" align="center">
-        Tech Blogs, <br /> One Byte at a Time
-        </Typography>
-        <Grid item>
-          <Grid
-            container
-            className={classes.buttonContainer}
-            direction="row"
-            justify="center"
-            spacing={1}
-          >
+        <Grid
+          className={classes.sloganContainer}
+          container
+          justify="space-evenly"
+          alignItems="center"
+          direction="row"
+        >
+          <Grid item>
+            <Typography className={classes.text} variant="h2" color="inherit" align="center">
+            Tech Blogs, <br /> One Byte at a Time
+            </Typography>
             <Grid item>
-              <Button
-                variant="outlined"
-                className={classes.button}
-                component={Link}
-                to={
-                  user.isLoggedIn
-                    ? '/blogs/create'
-                    : '/login'
-                }
+              <Grid
+                container
+                className={classes.buttonContainer}
+                direction="row"
+                justify="center"
+                spacing={1}
               >
-                Get Started
-              </Button>
+                <Grid item>
+                  <Button
+                    variant="outlined"
+                    className={classes.button}
+                    component={Link}
+                    to={
+                      user.isLoggedIn
+                        ? '/blogs/create'
+                        : '/login'
+                    }
+                  >
+                    Get Started
+                  </Button>
+                </Grid>
+                <Grid item>
+                  <Button
+                    variant="outlined"
+                    className={classes.button}
+                    component={ScrollLink}
+                    activeClass="active"
+                    to="learnMore"
+                    smooth={true}
+                  >
+                    LearnMore
+                  </Button>
+                </Grid>
+              </Grid>
             </Grid>
-            <Grid item>
-              <Button
-                variant="outlined"
-                className={classes.button}
-                component={Link}
-                to="/about"
-              >
-                Learn More
-              </Button>
-            </Grid>
+          </Grid>
+          <Grid item className={classes.imageContainer}>
+            <img src={testImage} style={{ height: 500, width: 700 }} />
           </Grid>
         </Grid>
       </Grid>
-      <Grid item className={classes.image}>
-        <img src={testImage} style={{ height: 500, width: 700 }} />
+      <Grid item>
+        <Grid
+          className={classes.learnMore}
+          container
+          justify="space-evenly"
+          alignItems="center"
+          direction="row"
+        >
+          <Grid item>
+            <Element name="learnMore"></Element>
+            <Typography className={classes.text} variant="h2" color="inherit" align="center">
+              Tech Blogs, <br /> A New Perspective
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Typography className={classes.text} variant="h2" color="inherit" align="center">
+            A Place To Share Knowledge, Skills, <br /> and Tips about Tools, Libraries, <br /> Frameworks and More!
+            </Typography>
+          </Grid>
+        </Grid>
       </Grid>
     </Grid>
   )

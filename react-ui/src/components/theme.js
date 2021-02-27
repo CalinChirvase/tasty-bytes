@@ -2,11 +2,13 @@ import { createMuiTheme } from '@material-ui/core/styles'
 
 const customBlue = '#0B72B9'
 const customOrange = '#FFBA60'
+const customRed = '#F44336'
 const theme = createMuiTheme({
   palette: {
     common: {
       blue: customBlue,
-      orange: customOrange
+      orange: customOrange,
+      red: customRed
     },
     primary: {
       main: customBlue
