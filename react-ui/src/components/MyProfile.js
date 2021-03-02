@@ -1,5 +1,6 @@
-import React from 'react'
-import { useSelector } from 'react-redux'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { Link as RouterLink } from 'react-router-dom'
 
 import Typography from '@material-ui/core/Typography'
 import Grid from '@material-ui/core/Grid'
@@ -7,7 +8,7 @@ import Paper from '@material-ui/core/Paper'
 import { makeStyles } from '@material-ui/core/styles'
 import Link from '@material-ui/core/Link'
 
-import { Link as RouterLink } from 'react-router-dom'
+import { getAll } from '../reducers/blogReducer'
 
 const useStyles = makeStyles({
   paper:{
@@ -21,9 +22,15 @@ const useStyles = makeStyles({
 const MyProfile = () => {
 
   const classes = useStyles()
+  const dispatch = useDispatch()
 
   const user = useSelector(state => state.user)
   const blogs = useSelector(state => state.blogs).filter(blog => blog.author === user.username)
+
+  useEffect(() => {
+    dispatch(getAll())
+  })
+
   return (
     <Grid container alignItems="center" direction="row" justify="center" className={classes.mainContainer}>
       <Paper elevation={7} className={classes.paper}>

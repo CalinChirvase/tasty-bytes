@@ -8,7 +8,7 @@ import Grid from '@material-ui/core/Grid'
 import Button from '@material-ui/core/Button'
 import { makeStyles } from '@material-ui/core/styles'
 
-import testImage from '../assets/test-image.jpg'
+import testImage from '../assets/test-image.png'
 
 const useStyles = makeStyles(theme => ({
   text: {
@@ -36,6 +36,10 @@ const useStyles = makeStyles(theme => ({
     flex: 1
   },
   learnMore: {
+    marginTop: '30rem',
+    marginBottom: '20rem'
+  },
+  getStarted: {
     marginTop: '30rem',
     marginBottom: '20rem'
   },
@@ -70,18 +74,26 @@ const Home = () => {
                 spacing={1}
               >
                 <Grid item>
-                  <Button
-                    variant="outlined"
-                    className={classes.button}
-                    component={Link}
-                    to={
-                      user.isLoggedIn
-                        ? '/blogs/create'
-                        : '/login'
-                    }
-                  >
-                    Get Started
-                  </Button>
+                  {user.isLoggedIn
+                    ? <Button
+                      variant="outlined"
+                      className={classes.button}
+                      component={Link}
+                      to={'/blogs/create'}
+                    >
+                      Get Started
+                    </Button>
+                    : <Button
+                      variant="outlined"
+                      className={classes.button}
+                      component={ScrollLink}
+                      activeClass="active"
+                      to="getStarted"
+                      smooth={true}
+                    >
+                      Get Started
+                    </Button>
+                  }
                 </Grid>
                 <Grid item>
                   <Button
@@ -99,11 +111,12 @@ const Home = () => {
             </Grid>
           </Grid>
           <Grid item className={classes.imageContainer}>
-            <img src={testImage} style={{ height: 500, width: 700 }} />
+            <img src={testImage} style={{ height: 500, width: 725 }} />
           </Grid>
         </Grid>
       </Grid>
       <Grid item>
+        <Element name="learnMore"></Element>
         <Grid
           className={classes.learnMore}
           container
@@ -112,15 +125,83 @@ const Home = () => {
           direction="row"
         >
           <Grid item>
-            <Element name="learnMore"></Element>
-            <Typography className={classes.text} variant="h2" color="inherit" align="center">
-              Tech Blogs, <br /> A New Perspective
-            </Typography>
+            <Grid container direction="column">
+              <Grid item>
+                <Typography className={classes.text} variant="h2" color="inherit" align="center">
+                  Tech Blogs, <br /> A New Perspective
+                </Typography>
+              </Grid>
+              <Grid item>
+                <Grid container className={classes.buttonContainer} justify="center" alignContent="center">
+                  <Grid item>
+                    {user.isLoggedIn
+                      ? <Button
+                        variant="outlined"
+                        className={classes.button}
+                        component={Link}
+                        to={'/blogs/create'}
+                      >
+                          Get Started
+                      </Button>
+                      : <Button
+                        variant="outlined"
+                        className={classes.button}
+                        component={ScrollLink}
+                        activeClass="active"
+                        to="getStarted"
+                        smooth={true}
+                      >
+                          Get Started
+                      </Button>
+                    }
+                  </Grid>
+                </Grid>
+              </Grid>
+            </Grid>
           </Grid>
           <Grid item>
             <Typography className={classes.text} variant="h2" color="inherit" align="center">
             A Place To Share Knowledge, Skills, <br /> and Tips about Tools, Libraries, <br /> Frameworks and More!
             </Typography>
+          </Grid>
+        </Grid>
+      </Grid>
+      <Grid item>
+        <Grid
+          className={classes.getStarted}
+          container
+          justify="space-evenly"
+          alignItems="center"
+          direction="row"
+        >
+          <Grid item>
+            <Element name="getStarted"></Element>
+            <Typography className={classes.text} variant="h2" color="inherit" align="center">
+              A Trove of Knowledge, <br /> Just One Click Away
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Grid container direction="column">
+              <Grid item>
+                <Typography className={classes.text} variant="h2" color="inherit" align="center">
+                  Start Your Free Account Today!
+                </Typography>
+              </Grid>
+              <Grid item>
+                <Grid container justify="center" className={classes.buttonContainer}>
+                  <Grid item>
+                    <Button
+                      variant="outlined"
+                      className={classes.button}
+                      component={Link}
+                      to={'/register'}
+                    >
+                      Create Account
+                    </Button>
+                  </Grid>
+                </Grid>
+              </Grid>
+            </Grid>
           </Grid>
         </Grid>
       </Grid>

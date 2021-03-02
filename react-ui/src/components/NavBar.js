@@ -32,7 +32,7 @@ const useStyles = makeStyles(theme => ({
     }
   },
   logo: {
-    height: '6.5rem'
+    height: '5.5rem'
   },
   tabContainer: {
     marginLeft: 'auto'
