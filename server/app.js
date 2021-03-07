@@ -3,12 +3,16 @@ const express = require('express')
 require('express-async-errors')
 const app = express()
 const cors = require('cors')
+
+// get routers
 const blogRouter = require('./controllers/blog')
 const userRouter = require('./controllers/user')
+const loginRouter = require('./controllers/login')
+const commentRouter = require('./controllers/comment')
+
 const middleware = require('./utils/middleware')
 const logger = require('./utils/logger')
 const mongoose = require('mongoose')
-const loginRouter = require('./controllers/login')
 const path = require('path')
 
 logger.info('connecting to', config.MONGODB_URI)
@@ -24,11 +28,13 @@ mongoose.connect(config.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology
 app.use(cors())
 app.use(express.static(path.resolve(__dirname, '../react-ui/build')))
 app.use(express.json())
-
 app.use(middleware.requestLogger)
+
+// setup routers
 app.use('/api/login', loginRouter)
 app.use('/api/blogs', blogRouter)
 app.use('/api/users', userRouter)
+app.use('/api/comments', commentRouter)
 
 if (process.env.NODE_ENV === 'test') {
     const testingRouter = require('./controllers/testing')

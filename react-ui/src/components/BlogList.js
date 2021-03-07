@@ -19,7 +19,7 @@ import Grid from '@material-ui/core/Grid'
 import { TablePagination } from '@material-ui/core'
 
 import TablePaginationActions from './TablePaginationActions'
-import { getAll } from '../reducers/blogReducer'
+import { getBlogs } from '../reducers/blogReducer'
 
 const useStyles = makeStyles({
   table: {
@@ -49,7 +49,7 @@ const BlogList = () => {
   const blogs = useSelector(state => state.blogs)
   const emptyRows = rowsPerPage - Math.min(rowsPerPage, blogs.length - page * rowsPerPage)
 
-  const handleChangePage = (event, newPage) => {
+  const handleChangePage = (_event, newPage) => {
     setPage(newPage)
   }
 
@@ -59,7 +59,7 @@ const BlogList = () => {
   }
 
   useEffect(() => {
-    dispatch(getAll())
+    dispatch(getBlogs())
   }, [dispatch])
 
   return (

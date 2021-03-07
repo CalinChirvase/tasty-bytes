@@ -8,7 +8,7 @@ import Paper from '@material-ui/core/Paper'
 import { makeStyles } from '@material-ui/core/styles'
 import Link from '@material-ui/core/Link'
 
-import { getAll } from '../reducers/blogReducer'
+import { getBlogs } from '../reducers/blogReducer'
 
 const useStyles = makeStyles({
   paper:{
@@ -28,8 +28,8 @@ const MyProfile = () => {
   const blogs = useSelector(state => state.blogs).filter(blog => blog.author === user.username)
 
   useEffect(() => {
-    dispatch(getAll())
-  })
+    dispatch(getBlogs())
+  },[dispatch])
 
   return (
     <Grid container alignItems="center" direction="row" justify="center" className={classes.mainContainer}>
