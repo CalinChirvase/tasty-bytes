@@ -20,7 +20,6 @@ import { TablePagination } from '@material-ui/core'
 
 import TablePaginationActions from './TablePaginationActions'
 import { getBlogs } from '../reducers/blogReducer'
-import { getComments } from '../reducers/commentReducer'
 
 const useStyles = makeStyles({
   table: {
@@ -61,7 +60,6 @@ const BlogList = () => {
 
   useEffect(() => {
     dispatch(getBlogs())
-    dispatch(getComments())
   }, [dispatch])
 
   return (

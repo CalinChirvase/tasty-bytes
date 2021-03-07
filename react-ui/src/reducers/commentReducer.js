@@ -10,10 +10,27 @@ export const getComments = () => {
   }
 }
 
+export const leaveComment = (content, blog, user) => {
+  return async dispatch => {
+    const newComment = {
+      content: content,
+      blog: blog,
+      user: user
+    }
+    const response = await commentService.createComment(newComment)
+    dispatch({
+      type: 'CREATE_COMMENT',
+      data: response
+    })
+  }
+}
+
 const commentReducer = (state= [], action) => {
   switch(action.type) {
   case 'GET_COMMENTS':
     return action.data
+  case 'CREATE_COMMENT':
+    return state.concat(action.data)
   default:
     return state
   }

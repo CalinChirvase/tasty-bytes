@@ -7,8 +7,11 @@ import Grid from '@material-ui/core/Grid'
 const Comment = ({ comment }) => {
   return (
     <Grid item>
+      <Typography color="inherit" variant="h5">
+        {comment.user.username} said:
+      </Typography>
       <Typography color="inherit" variant="body1">
-        {comment.user.username} said: {comment.content}
+        {comment.content}
       </Typography>
     </Grid>
   )

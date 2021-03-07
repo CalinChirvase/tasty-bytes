@@ -17,6 +17,7 @@ import { useHistory } from 'react-router-dom'
 import { login } from '../reducers/loginReducer'
 import loginService from '../services/login'
 import blogService from '../services/blogs'
+import commentService from '../services/comments'
 
 
 const useStyles = makeStyles({
@@ -53,6 +54,7 @@ const LoginForm = () => {
       const response = await loginService.login(username, password)
       dispatch(login(response))
       blogService.setToken(response.token)
+      commentService.setToken(response.token)
       history.push('/')
     } catch (error) {
       //display alert if login fails
