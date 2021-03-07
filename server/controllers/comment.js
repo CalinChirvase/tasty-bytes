@@ -32,4 +32,9 @@ commentRouter.post('/', async (request, response) => {
     response.json(savedComment)
 })
 
+commentRouter.get('/', async (_request, response) => {
+    const comments = await Comment.find({}).populate('user', {username: 1, name: 1}).populate('blogs')
+    response.json(comments)
+})
+
 module.exports = commentRouter

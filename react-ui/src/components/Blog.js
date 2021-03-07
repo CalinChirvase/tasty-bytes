@@ -11,6 +11,7 @@ import Grid from '@material-ui/core/Grid'
 import { makeStyles } from '@material-ui/core/styles'
 
 import { likeBlog } from '../reducers/blogReducer'
+import Comment from './Comment'
 
 const useStyles = makeStyles({
   paperContainer: {
@@ -34,6 +35,9 @@ const useStyles = makeStyles({
   },
   mainContainer: {
     flex: 1
+  },
+  commentsContainer: {
+    marginTop: '2rem'
   }
 })
 const Blog = () => {
@@ -41,12 +45,14 @@ const Blog = () => {
   const dispatch = useDispatch()
   const id = useParams().id
   const blog = useSelector(state => state.blogs).find(blog => blog.id === id)
+  const comments = useSelector(state => state.comments).filter(comment => comment.blog === id)
 
   const handleLike = async () => {
     const newBlog = { ...blog, likes: blog.likes + 1 }
     dispatch(likeBlog(id, newBlog))
 
   }
+
   return (
     <Grid container justify="center" alignItems="center" className={classes.mainContainer}>
       <Grid item>
@@ -85,6 +91,17 @@ const Blog = () => {
               <Button onClick={() => handleLike()} color="primary" variant="contained">
                 Like
               </Button>
+            </Grid>
+          </Grid>
+          <Grid item>
+            <Grid container spacing={2} direction="column" justify="center" className={classes.commentsContainer}>
+              <Grid item>
+                <Typography color="inherit" variant="h4">
+                    Comments:
+                </Typography>
+              </Grid>
+              {comments.map(comment => <Comment key={comment.key} comment={comment} />
+              )}
             </Grid>
           </Grid>
         </Paper>

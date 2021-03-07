@@ -1,6 +1,6 @@
 import blogService from '../services/blogs'
 
-export const getAll = () => {
+export const getBlogs = () => {
   return async dispatch => {
     const response = await blogService.getAll()
     dispatch({
