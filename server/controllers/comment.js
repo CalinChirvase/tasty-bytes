@@ -11,6 +11,7 @@ const getTokenFrom = request => {
     return null
 }
 
+// create a comment
 commentRouter.post('/', async (request, response) => {
     const body = request.body
     const token = getTokenFrom(request)
@@ -30,6 +31,7 @@ commentRouter.post('/', async (request, response) => {
     response.json(savedComment)
 })
 
+// get all comments
 commentRouter.get('/', async (_request, response) => {
     const comments = await Comment.find({}).populate('user', {username: 1, name: 1}).populate('blogs')
     response.json(comments)
