@@ -34,11 +34,23 @@ export const createBlog = (title, content) => {
   }
 }
 
+export const editBlog = (id, editedBlog) => {
+  return async dispatch => {
+    await blogService.update(id, editedBlog)
+    dispatch({
+      type: 'EDIT_BLOG',
+      data: editedBlog
+    })
+  }
+}
+
 const blogReducer = (state= [], action) => {
   switch(action.type) {
   case 'GET_BLOGS':
     return action.data
   case 'LIKE_BLOG':
+    return state.map(blog => blog.id === action.data.id ?  action.data : blog)
+  case 'EDIT_BLOG':
     return state.map(blog => blog.id === action.data.id ?  action.data : blog)
   case 'NEW_BLOG':
     return state.concat(action.data)
