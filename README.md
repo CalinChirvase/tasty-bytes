@@ -6,7 +6,7 @@ Deployed on [Heroku](https://www.heroku.com/), live version [here](https://tasty
 
 ## Frontend Built With:
 - [React](https://reactjs.org/)
-- [Materil-UI](https://material-ui.com/)
+- [Material-UI](https://material-ui.com/)
 - [Redux](https://redux.js.org/)
 - [Axios](https://github.com/axios/axios)
 
@@ -24,7 +24,7 @@ Website uses REST API routes and page navigation is handled with [React Router](
 |  /api/blogs      | GET       | fetch all blogs                      |
 |  /api/blogs/:id  | GET       | fetch a single blog                  |
 |  /api/blogs      | POST      | create a blog                        |
-|  /api/blogs/:id  | UPDATE    | update a blog                        |
+|  /api/blogs/:id  | PUT       | update a blog                        |
 |  /api/blogs/:id  | DELETE    | delete a blog                        |
 |  /api/comments   | GET       | fetch all comments                   |
 |  /api/comments   | POST      | create a comment                     |
