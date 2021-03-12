@@ -116,34 +116,36 @@ const Blog = () => {
                 Likes : {blog.likes}
               </Typography>
             </Grid>
-            <Grid item className={classes.likeButtonContainer}>
-              <Button onClick={() => handleLike()} color="primary" variant="contained">
-                Like
-              </Button>
-            </Grid>
-            {blog.author === user.username ?
-              <React.Fragment>
+            <Grid item>
+              <Grid container spacing={2} className={classes.likeButtonContainer}>
                 <Grid item>
-                  <Button onClick={() => handleEdit()} color="primary" variant="contained">
-                    {edit
-                      ? 'Cancel'
-                      : 'Edit'
-                    }
+                  <Button onClick={() => handleLike()} color="primary" variant="contained">
+                  Like
                   </Button>
                 </Grid>
-                {edit
-                  ? <Grid item>
-                    <Button onClick={handleUpdate} color="primary" variant="contained">
-                      Update Blog
-                    </Button>
-                  </Grid>
+                {blog.author === user.username ?
+                  <React.Fragment>
+                    <Grid item>
+                      <Button onClick={() => handleEdit()} color="primary" variant="contained">
+                        {edit
+                          ? 'Cancel'
+                          : 'Edit'
+                        }
+                      </Button>
+                    </Grid>
+                    {edit
+                      ? <Grid item>
+                        <Button onClick={handleUpdate} color="primary" variant="contained">
+                        Update Blog
+                        </Button>
+                      </Grid>
+                      : null
+                    }
+                  </React.Fragment>
                   : null
                 }
-              </React.Fragment>
-              : null
-            }
-          </Grid>
-          <Grid item>
+              </Grid>
+            </Grid>
             <Grid container spacing={2} direction="column" justify="center" className={classes.commentsContainer}>
               <Grid item>
                 <Typography color="inherit" variant="h4">
