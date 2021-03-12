@@ -34,12 +34,12 @@ export const createBlog = (title, content) => {
   }
 }
 
-export const editBlog = (id, newBlog) => {
+export const editBlog = (id, editedBlog) => {
   return async dispatch => {
-    await blogService.update(id, newBlog)
+    await blogService.update(id, editedBlog)
     dispatch({
       type: 'EDIT_BLOG',
-      data: newBlog
+      data: editedBlog
     })
   }
 }

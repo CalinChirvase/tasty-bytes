@@ -70,7 +70,6 @@ const Blog = () => {
 
   const handleUpdate = async () => {
     const newBlog = { ...blog, content: editContent }
-    console.log(newBlog)
     dispatch(editBlog(id, newBlog))
     setEdit(false)
   }
